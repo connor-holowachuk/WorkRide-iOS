@@ -19,13 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     var window: UIWindow?
 
-    // AIzaSyAItzHL6rtfpJGQIiD8ctO51wsD8w9zH-U
+   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        STPPaymentConfiguration.shared().publishableKey = "pk_test_p4q6oRnr5lGGQQ9i1oEUUgBU"
-        GMSServices.provideAPIKey("AIzaSyD14fxBsfUQ5srn1kHk7O4l4DkjZsSa_WU")
+        STPPaymentConfiguration.shared().publishableKey = ""
+        GMSServices.provideAPIKey("")
         
         if #available(iOS 10.0, *) {
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
