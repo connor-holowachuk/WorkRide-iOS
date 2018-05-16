@@ -1,0 +1,368 @@
+"db-id":{
+	"users":{
+		// stores all information pretaining to drivers and riders
+		"userinfo":{
+			// stores user personal information, contact, vehicle,
+			// address and business reference info
+			"<user_UID>":{
+				"quick":{
+					"firstname":"",
+					"lastname":""
+					"activedriver":true
+				},
+				"signedupasdriver":true,
+				"fullname":"",
+				"email":"",
+				"phonenumber":1234567890,
+				"carmake":"",
+				"carmodel":"",
+				"carcolour":"",
+				"caryear":0000,
+				"streetaddressa":"",
+				"streetaddressb":"",
+				"city":"",
+				"province":"",
+				"postalcode":"",
+				"country":"",
+				"businessuid":"<business_UID>",
+				"locationuid":"<location_UID>",
+				"registeredtimestamp":"yyyy-mm-ddThh:mm",
+				"dob":{
+					"day":0,
+					"month":0,
+					"year":0
+				}
+			}
+		},
+		"pickupinfo":{
+			"<user_UID>":{
+				"lat":0.0,
+				"lng":0.0,
+				"fare":238,
+				"businessuid":"<business_UID>",
+				"businessloactionid":"<location_UID>",
+				"firstname":"",
+				"isdriver":false,
+				"seats":0
+			}
+		},
+		"financial":{
+			"<user_UID>":{
+				"stripeaccountid":"",
+				"lastfourdigits":"",
+				"hasUploadedIDNumber":false,
+				"hasUploadedIDDocument":false
+			}
+		},
+		"schedule":{
+			"<driver_UID>":{
+				"<year>":{
+					"<month>":{
+						"<day>":{
+							"to":{
+								"time":0,
+								"daytime":0,
+								"id":"<ride_UID>",
+								"ismatched":false
+							},
+							"from":{
+								"time":0,
+								"daytime":0,
+								"id":"<ride_UID>",
+								"ismatched":false
+							}
+						}
+					}
+				}
+			}
+		},
+		"confirmedrides":{
+			"<user_UID>":{
+				"000000":{
+					"to":{
+						"isDriver":true,
+						"riders":[
+							0:{
+								"isdriver":false,
+								"uid":"",
+								"lat":0.0,
+								"lng":0.0,
+								"firstname":"",
+								"pickuptime":0
+							}
+						]
+					},
+					"from":{
+
+					}
+				}
+			}
+		}
+	},
+	"rides":{
+		"<business_UID>":{
+			// stores all trip info pretaining to associated biz
+			"to":{
+				// stores all to-work trip info
+				"000":{
+					"scheduleref":{
+							"schedyear":0,							// year for schedule reference
+							"schedmonth":0,							// month for schedule reference
+							"schedday":0,							// day for schedule reference
+							"daytime":0								// time of day, mins, rel to 12:00am
+					},
+					"queue":{
+						// stores all possible open rides for given time
+						// includes drivers with empty vehicles 
+						"<ride_UID>":{
+							"driveruid":"<user_UID>",
+							"driverfirstname":"",
+							"driverlat":0.0,
+							"driverlon":0.0,
+							"drivernormtime":0,
+							"drivernormdist":0,
+							"leavetime":0,
+							"leavedaytime":0,
+							"arrivetime":0,
+							"arrivedaytime":0,
+							"totalseats":4,
+							"riders":[
+								0:{
+									"uid":"<user_UID>",				// uid of rider
+									"lat":0.0,						// lat of pickup location
+									"lng":0.0,						// lng of pickup locations
+									"normtimetodeliver":0,			// min time for rider to arrive at work (m)
+									"normdisttodeliver":0,			// min dist for rider to arrive at work (m)
+									"meettime":0,					// expected time for driver to meet rider
+									"fare":238						// ride fare based on location (cents)
+								}
+							]
+						}
+					},
+					"pending":[
+						// stores users looking for rides
+						// will be used when all driver vehicles are full
+						0:{
+							"firstname":"",							// first name of rider
+							"uid":"<user_UID>",						// uid of rider
+							"lat":0.0,								// lat of pickup location
+							"lng":0.0,								// lng of pickup locations
+							"normtimetodeliver":0,					// min time for rider to arrive at work (m)
+							"normdisttodeliver":0,					// min dist for rider to arrive at work (m)
+							"fare":238								// ride fare based on location (cents)
+						}
+					],
+					"full":{
+						// stores upcoming full rides
+						// used to place back in "queue" if cancelation occurs
+						"<ride_UID>":{
+							"driveruid":"<user_UID>",
+							"driverfirstname":"",
+							"driverlat":0.0,
+							"driverlon":0.0,
+							"drivernormtime":0,
+							"drivernormdist":0,
+							"leavetime":0,
+							"totalseats":4,
+							"riders":[
+								0:{
+									"uid":"<user_UID>",				// uid of rider
+									"firstname":"",					// first name of rider
+									"lat":0.0,						// lat of pickup location
+									"lng":0.0,						// lng of pickup locations
+									"normtimetodeliver":0,			// min time for rider to arrive at work (m)
+									"normdisttodeliver":0,			// min dist for rider to arrive at work (m)
+									"meettime":0					// expected time for driver to meet rider
+								}
+							]
+						}
+					}
+				}
+			},
+			"from":{
+
+			}
+		},
+		"tripinfo":{
+			// stores basic information on each trip
+			// refer to ../"trippaths" for full path
+			"<user_UID>":[
+				0:{
+					"pathuid":"<path_UID>",
+					"starttimestamp":"yyyy-mm-ddThh:mm",
+					"endtimestamp":"yyyy-mm-ddThh:mm",
+					"driver":false,
+					"passengeruids":[
+						0:"<user_UID>",
+						1:"<user_UID>"
+					]
+				}
+			]
+		},
+		"trippaths":{
+			// stores full location log for each trip
+			// refer to ../"tripinfo" for full path
+			"<path_UID>":[
+				0:{
+					"lat":0.0,
+					"lng":0.0,
+					"deltatime":0.0
+				}
+			]
+		}
+	},
+	"business":{
+		// stores all information pretaining to businesses
+		"businessinfo":{
+			"<business_UID>":{
+				"businessname":"",
+				"primarycontactfirstname":"",
+				"primarycontactlastname":"",
+				"phonenumber":1234567890,
+				"email":"",
+				"primarylocationid":"<location_UID>"
+			}
+		},
+		"locations":{
+			"<business_UID>":{
+				"<location_UID>":{
+					"info":{
+						"streetaddressa":"",
+						"streetaddressb":"",
+						"city":"",
+						"province":"",
+						"postalcode":"",
+						"country":""
+					},
+					"location":{
+						"lat":0.0,
+						"lng":0.0
+					},
+					"users":[
+						0:"<user_UID>",
+						1:"<user_UID>"
+					]
+				}
+			}
+		},
+		"fare":{
+			"<business_UID>":{
+				"maxcostperride": 635			// Int of cents
+			}
+		}
+		"searchable":{
+			"names":[
+				0:{
+					"name":"Highline Mushroom",
+					"uid":"<business_UID>",
+					"locations":[
+						0:{
+							"descriptor":"Leamington",
+							"locationid":"<location_UID>"
+						}
+					]
+				}
+			]
+		}
+	},
+	"conversations":{
+		"<user_UID>":{
+			"chats":[
+				// contains array of chat content from convos
+				0:{
+					"subject":"",
+					"lastmessage":"",
+					"lastsenderuid":"<user_UID>",
+					"lastsendername":"",
+					"lastmessagetimestamp":"yyyy-mm-ddThh:mm"
+				}
+			],
+			"members":[
+				// contains array of member content from convos
+				0:[
+					// contains array of member info for this convo
+					0:{
+						"name":"",
+						"activedriver":false,
+						"memberuid":"<user_UID>"
+					}
+				]
+			]
+			"messages":[
+				// contains array of all message content from convos
+				0:[
+					// contains array of individual messages within convo
+					0:{
+						"name":"",
+						"senderuid":"<user_UID>"
+						"message":,
+						"timestamp":"yyyy-mm-ddThh:mm"
+					}
+				]
+			]
+		}
+	},
+	"notifications":{
+		"clock":0,
+		"deviceid":{
+			"<user_UID>":{
+				"token":""
+			}
+		},
+		"preferences":{
+			"<user_UID>":{
+
+			}
+		}
+		"scheduled":{
+			// stores all scheduled notifications
+			// organized by minute Int
+			"0":{
+				"<user_UID>":{
+					"title":"",
+					"body":""
+				}
+			}
+		}
+	},
+	"mlvars":{
+		"user":{
+			"<user_UID>":{
+				"weighting":100,
+				"cancelations":100,
+				"cancelationtimes":100,
+				"sharedratings":100,
+				"isDriver":false,
+				"driverspecific":{
+					"latetoworktime":100,
+					"timeslatetowork":100
+				},
+				"riderspecific":{
+					"driverwaittime":100
+				}
+			}
+		},
+		"business":{
+			"<business_UID>":{
+				"avgtimedeviation":1.0,
+				"avgdistancedeviation":1.0
+			}
+		}
+		"rating":{
+			"timeweight":50,
+			"distweight":50
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
